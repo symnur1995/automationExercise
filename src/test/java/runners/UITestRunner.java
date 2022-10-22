@@ -10,18 +10,15 @@ import org.junit.runner.RunWith;
         plugin={"html:target/cucumber-html-reports/UI_cucumber.html", // buradaki / \\ idi, degistirdim, emin degilim
                 "json:target/json-reports/UI_cucumber.json",
                 "junit:target/xml-report/UI_cucumber.xml"},
-        features="src/test/resources/features/uiFeatures",
+        features="src/test/resources/uiFeature",
         glue= "stepDefinitions",
 
-        tags = "@smoke",
+        tags = "tc04",
 
         dryRun = false
 
 
-
-
 )
-
 
 
 public class UITestRunner {

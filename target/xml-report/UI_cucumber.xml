@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" time="0.098"/>
+<testsuite errors="0" failures="10" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="11" time="0.368">
+    <testcase classname="Contact Us form" name="TC_006_01 Launch Browser" time="0.054">
+        <system-out><![CDATA[Given User Launch Browser...................................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_02  Navigate to url 'Url'" time="0.002">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User navigate to url 'Url'............................................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_03 User Verify that home page is visible successfully" time="0">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User verify successfully..............................................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_04   Click on 'Contact Us' button" time="0.001">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User click on 'Contact Us' button.....................................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_05  User Verify 'GET IN TOUCH' is visible" time="0.002">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User verify 'GET IN TOUCH' is visible.................................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_06 User  Enters name, email, subject and message" time="0.002">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User Enters name, email, subject and message..........................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_07   Upload file" time="0.002">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User upload file......................................................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_08 Click 'Submit' button" time="0.001">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User click 'Submit' button............................................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_09   Click OK button" time="0">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User click 'OK' button................................................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_10   Verify success message 'Success! Your details have been submitted successfully.' is visible" time="0.001">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User verify successfully..............................................undefined
+]]></failure>
+    </testcase>
+    <testcase classname="Contact Us form" name="TC_006_11 User Click 'Home' button and verify that landed to home page successfully" time="0">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given User Click 'Home' button and verify...................................undefined
+]]></failure>
+    </testcase>
+</testsuite>

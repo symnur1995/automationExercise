@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         features="src/test/resources/uiFeature",
         glue= "stepDefinitions",
 
-        tags = "tc04",
+        tags = "@aut",
 
         dryRun = false
 

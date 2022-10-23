@@ -10,14 +10,7 @@ public class TC_04_StepDefinitions {
     TC_04 tc_04 =new TC_04();
 
 
-    @Then("Home page de oldugunu dogrular")
-    public void home_page_de_oldugunu_dogrular() {
-    Assert.assertTrue(tc_04.homePage.isDisplayed());
-    }
-    @Then("Signup Login ikonuna tiklar")
-    public void signup_login_ikonuna_tiklar() {
-    tc_04.signinButonu.click();
-    }
+
     @Then("{string} yazisinin gorundugunu test eder.")
     public void yazisinin_gorundugunu_test_eder(String string) {
     Assert.assertTrue(tc_04.LoginYazisi.isDisplayed());

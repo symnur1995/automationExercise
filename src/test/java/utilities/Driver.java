@@ -1,170 +1,124 @@
-package utilities;
+package utulities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
-
 
 public class Driver {
 
 
     /*
-       POM'de Driver icin TestBase class'ina extends etmek yerine
-       Driver class'indan static method'lar kullanarak
-       driver olusturup, ilgili ayarlarin yapilmasi
-       ve en sonda driver'in kapatilmasi tercih edilmistir.
-        */
-    // POM de Driver Class indan obje olusturulmasi istenen 1 durum degildir.
-    // Bu durumda Driver Class ndaki  Contructor Private yapilir. Buna Singleton pattern denir (tekli kullanim)
-
-
-    private static final int timeout = 5;
-    private Driver(){
-
+     Creating the private constructor so this class' object
+     is not reachable from outside
+      */
+    private Driver() {
     }
 
-    static WebDriver driver;
+    /*
+    Making our 'driver' instance private so that it is not reachable from outside the class.
+    We make it static, because we want it to run before everything else, and also we will use it in a static method
+     */
+    private static ThreadLocal<WebDriver> driverPool = new ThreadLocal<>();
 
-
+    /*
+    Creating re-usable utility method that will return same 'driver' instance everytime we call it.
+     */
     public static WebDriver getDriver() {
-        if (driver==null) {
-            switch (ConfigReader.getProperty("browser")){
-                case "chrome":
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                    break;
-                case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
-                    driver=new FirefoxDriver();
-                    break;
-                default: WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+        //setting various capabilities for browsers
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("use-fake-ui-for-media-stream");
+
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("use-fake-ui-for-media-stream");
+
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.addArguments("use-fake-ui-for-media-stream");
+
+        if (driverPool.get() == null) {
+            synchronized (Driver.class) {
+
+            /*
+            We read our browser type from configuration.properties file using
+            .getProperty method we create in ConfigurationReader class.
+             */
+                String browserType = ConfigurationReader.getProperty("browser");
+            /*
+            Depending on the browser type our switch statement will determine
+            to open specific type of browser/driver
+             */
+                switch (browserType) {
+
+                    case "chrome":
+                        WebDriverManager.chromedriver().setup();
+                        driverPool.set(new ChromeDriver(chromeOptions));
+                        break;
+
+                    case "chrome-headless":
+                        WebDriverManager.chromedriver().setup();
+                        driverPool.set(new ChromeDriver(new ChromeOptions().setHeadless(true)));
+                        break;
+
+                    case "firefox":
+                        WebDriverManager.firefoxdriver().setup();
+                        driverPool.set(new FirefoxDriver(firefoxOptions));
+                        break;
+
+                    case "firefox-headless":
+                        WebDriverManager.firefoxdriver().setup();
+                        driverPool.set(new FirefoxDriver(new FirefoxOptions().setHeadless(true)));
+                        break;
+
+                    case "ie":
+                        if (!System.getProperty("os.name").toLowerCase().contains("windows"))
+                            throw new WebDriverException("Your OS doesn't support Internet Explorer");
+                        WebDriverManager.iedriver().setup();
+                        driverPool.set(new InternetExplorerDriver());
+                        break;
+
+                    case "edge":
+                        if (!System.getProperty("os.name").toLowerCase().contains("windows"))
+                            throw new WebDriverException("Your OS doesn't support Edge");
+                        WebDriverManager.edgedriver().setup();
+                        driverPool.set(new EdgeDriver());
+                        break;
+
+                    case "safari":
+                        if (!System.getProperty("os.name").toLowerCase().contains("mac"))
+                            throw new WebDriverException("Your OS doesn't support Safari");
+                        WebDriverManager.getInstance(SafariDriver.class).setup();
+                        driverPool.set(new SafariDriver());
+                        break;
+                }
+                driverPool.get().manage().window().maximize();
+                driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
             }
-
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         }
-
-        return driver;
+        /*
+        Same driver instance will be returned every time we call Driver.getDriver(); method
+         */
+        return driverPool.get();
     }
 
+    /*
+    This method makes sure we have some form of driver session or driver id has.
+    Either null or not null it must exist.
+     */
     public static void closeDriver() {
-        if (driver!=null) {
-            driver.close();
-            driver=null;
+        if (driverPool.get() != null) {
+            driverPool.get().quit();
+            driverPool.remove();
         }
     }
-    public static void waitAndClick(WebElement element, int timeout) {
-        for (int i = 0; i < timeout; i++) {
-            try {
-                element.click();
-                return;
-            } catch (WebDriverException e) {
-                wait(1);
-            }
-        }
-    }
-
-    public static void waitAndSendText(WebElement element,String text) {
-        for (int i = 0; i < timeout; i++) {
-            try {
-                element.sendKeys(text);
-                return;
-            } catch (WebDriverException e) {
-                wait(1);
-            }
-        }
-    }
-    public static void clickWithJS(WebElement element) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
-    }
-
-
-
-
-    public static void waitAndSendTextWithDefaultTime(WebElement element,String text) {
-        for (int i = 0; i < timeout; i++) {
-            try {
-                element.sendKeys(text);
-                return;
-            } catch (WebDriverException e) {
-                wait(1);
-            }
-        }
-    }
-
-    public static String waitAndGetText(WebElement element, int timeout) {
-        String text="";
-        for (int i = 0; i < timeout; i++) {
-            try {
-                text = element.getText();
-                return text;
-            } catch (WebDriverException e) {
-                wait(1);
-            }
-        }
-        return null;
-    }
-
-
-    //Webdriver
-    //ChromeDriver
-    //Iedriver
-    //FirefoxDriver
-
-    public static void wait2(int sec){
-        try {
-            Thread.sleep(1000*sec);
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }catch (TimeoutException e){
-            e.printStackTrace();
-        }catch (StaleElementReferenceException e){
-            e.printStackTrace();
-        }catch (ElementClickInterceptedException e){
-            e.printStackTrace();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-    //5 seconds
-    public static void waitAndClickElement(WebElement element , int seconds){
-        for (int i = 0; i < seconds ; i++) {
-
-            try {
-                element.click();
-                break;
-            }catch (Exception e){
-                wait2(1);
-            }
-
-
-        }
-    }
-
-
-
-    public static void wait(int secs) {
-        try {
-            Thread.sleep(1000 * secs);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }catch (StaleElementReferenceException e) {
-            e.printStackTrace();
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }
+
+

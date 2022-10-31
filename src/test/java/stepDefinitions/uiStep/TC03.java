@@ -1,4 +1,4 @@
-package stepdefinitions;
+package stepDefinitions.uiStep;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -24,7 +24,7 @@ public class TC03 {
     }
     @And("Verify that home page is visible successfully")
     public void verifyThatHomePageIsVisibleSuccessfully() {
-        String expectedUrl = ConfigReader.getProperty("Url");
+        String expectedUrl = ConfigReader.getProperty("Url"); //https://automationexercise.com/
         String actualUrl=Driver.getDriver().getCurrentUrl();
         Assert.assertEquals(expectedUrl,actualUrl);
     }

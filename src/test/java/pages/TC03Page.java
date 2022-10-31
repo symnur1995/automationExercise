@@ -31,15 +31,21 @@ public class TC03Page {
     @FindBy(xpath = "//p[text()='Your email or password is incorrect!']")
     public WebElement incorrectYazi;
 
+    @FindBy(xpath ="//a[contains(text(),'Test Cases')]" )
+    public WebElement testCase;
 
-
-
-
-
-
-
-
-
-
-
+    @FindBy(xpath = "//span[@style='color: red;']")
+    public WebElement stringText;
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" time="0.098"/>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="35.295">
+    <testcase classname="TC03" name="_2" time="33.726">
+        <system-out><![CDATA[Given Kullanici "Url" adresine gider........................................passed
+Then Home page de oldugunu dogrular.........................................passed
+Then Signup Login ikonuna tiklar............................................passed
+Then Verify 'Login to your account' is visible..............................passed
+And Enter incorrect email address and password..............................passed
+And Click login button......................................................passed
+Then Verify error 'Your email or password is incorrect!' is visible.........passed
+]]></system-out>
+    </testcase>
+</testsuite>

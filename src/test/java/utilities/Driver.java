@@ -166,5 +166,11 @@ public class Driver {
         }
     }
 
+    public static void jsScroolAndClck(WebElement webElement) {
 
+        JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+        js.executeScript("arguments[0].scrollIntoView(true);",webElement);
+        js.executeScript("arguments[0].click();",webElement);
+        //webElement.click();
+    }
 }

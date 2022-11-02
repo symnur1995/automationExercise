@@ -26,6 +26,8 @@ public class TC13Page {
     @FindBy(xpath = "//button[normalize-space()='4']")
     public WebElement sepet;
 
+    //div[@class='footer-widget']//div[@class='row']
+
 
 
 

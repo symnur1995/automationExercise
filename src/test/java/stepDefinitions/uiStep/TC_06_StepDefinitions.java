@@ -12,11 +12,11 @@ public class TC_06_StepDefinitions {
 
     TC_06 page = new TC_06();
 
-    @When("User Launch Browser")
-    public void UserLaunchBrowser() {
-     Driver.getDriver();
-
-    }
+//    @When("User Launch Browser")
+//    public void UserLaunchBrowser() {
+//     Driver.getDriver();
+//
+//    }
     @Given("User navigate to  {string}")
     public void userNavigateTo(String arg0) {
         Driver.getDriver().get("https://www.automationexercise.com");

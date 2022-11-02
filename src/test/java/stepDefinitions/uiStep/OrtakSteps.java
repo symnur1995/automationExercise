@@ -15,11 +15,12 @@ public class OrtakSteps {
     @Given("Kullanici {string} adresine gider")
     public void kullanici_adresine_gider(String url) {
 
-        Driver.getDriver().get(ConfigReader.getProperty(url));
+        Driver.getDriver().get(ConfigReader.getProperty("Url"));
 
     }
     @Then("Home page de oldugunu dogrular")
     public void home_page_de_oldugunu_dogrular() {
+
         Assert.assertTrue(ortakPages.homePage.isDisplayed());
     }
 

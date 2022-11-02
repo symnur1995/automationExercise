@@ -7,13 +7,18 @@ import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 
 import pages.TC_08;
+import utilities.ConfigReader;
 import utilities.Driver;
 
 public class TC08_StepDefinition {
     TC_08 page=new TC_08();
 
 
+    @Given("Navigate to url {string}")
+    public void navigateToUrl(String str) {
+        Driver.getDriver().get(ConfigReader.getProperty("Url"));
 
+    }
 
 
     @And("Click on {string} button")
@@ -70,16 +75,9 @@ public class TC08_StepDefinition {
         Driver.closeDriver();
     }
 
-//    @Given("Launch browser")
-//    public void launchBrowser() {
-//        Driver.getDriver();
-//    }
-//
-//    @Then("Navigate to url {string}")
-//    public void navigateToUrl(String str) {
-//
-//        Driver.getDriver().get("https://www.automationexercise.com");
-//    }
+
+
+
 
 
 }

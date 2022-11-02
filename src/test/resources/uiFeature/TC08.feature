@@ -2,7 +2,7 @@ Feature: Verify All Products and product detail page
 
   Scenario: User verifies all products and product detail pages
 
-
+  Given  Navigate to url "Url"
   And    Verify that home page is visible successfully
   And    Click on 'Products' button
   And    Verify user is navigated to ALL PRODUCTS page successfully

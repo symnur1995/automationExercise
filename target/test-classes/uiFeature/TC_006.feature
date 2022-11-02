@@ -3,7 +3,7 @@
 
     Scenario:Fills in the contact us form with valid credentials
 
-   When   User Launch Browser
+
    Given Kullanici "Url" adresine gider
    Then Home page de oldugunu dogrular
    Given  User Click on 'Contact Us' button

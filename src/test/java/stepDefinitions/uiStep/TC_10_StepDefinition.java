@@ -1,6 +1,7 @@
 package stepDefinitions.uiStep;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,7 +11,12 @@ import utilities.Driver;
 public class TC_10_StepDefinition {
    TC_10 page=new TC_10();
 
-    @And("Scroll down to footer")
+    @Given("Launch browser")
+    public void launchBrowser() {
+        Driver.getDriver();
+    }
+
+   @And("Scroll down to footer")
     public void scrollDownToFooter() throws InterruptedException {
         JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
         js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
@@ -46,4 +52,6 @@ public class TC_10_StepDefinition {
     public void userCloseDriver() {
         Driver.closeDriver();
     }
+
+
 }

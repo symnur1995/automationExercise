@@ -12,7 +12,13 @@ public class TC026_StepDefinition {
 
      TC026Page page=new TC026Page();
      Actions actions=new Actions(Driver.getDriver());
-    @And("Scroll down page to bottom")
+   @Given("Launch browser")
+    public void launchBrowser() {
+        Driver.getDriver();
+    } 
+     
+     
+     @And("Scroll down page to bottom")
     public void scrollDownPageToBottom() {
         actions.sendKeys(Keys.PAGE_DOWN).perform();
         actions.sendKeys(Keys.PAGE_DOWN).perform();
@@ -53,10 +59,9 @@ public class TC026_StepDefinition {
     @And("Verify that page is scrolled up and {string} text is visible on screen")
     public void verifyThatPageIsScrolledUpAndFullFledgedPracticeWebsiteForAutomationEngineersTextIsVisibleOnScreen(String str) {
         Assert.assertTrue(page.fledgeText.isDisplayed());
+         System.out.println("ismail");
     }
+     
 
-    @Given("Launch browser")
-    public void launchBrowser() {
-        Driver.getDriver();
-    }
+    
 }

@@ -20,11 +20,13 @@ public class OrtakSteps {
     }
     @Then("Home page de oldugunu dogrular")
     public void home_page_de_oldugunu_dogrular() {
+
         Assert.assertTrue(ortakPages.homePage.isDisplayed());
     }
 
     @Then("Signup Login ikonuna tiklar")
     public void signup_login_ikonuna_tiklar() {
+
         ortakPages.signinButonu.click();
     }
 

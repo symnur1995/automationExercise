@@ -1,4 +1,4 @@
-package utulities;
+package utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -51,7 +51,7 @@ public class Driver {
             We read our browser type from configuration.properties file using
             .getProperty method we create in ConfigurationReader class.
              */
-                String browserType = ConfigurationReader.getProperty("browser");
+                String browserType = ConfigReader.getProperty("browser");
             /*
             Depending on the browser type our switch statement will determine
             to open specific type of browser/driver
